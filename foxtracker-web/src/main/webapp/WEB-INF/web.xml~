@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+
+	<!-- ****************************** Context Listeners ********************* -->
+
+	<!-- ****************************** SERVLETS ****************************** -->
+	<servlet>
+		<servlet-name>appstats</servlet-name>
+		<servlet-class>com.google.appengine.tools.appstats.AppstatsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>appstats</servlet-name>
+		<url-pattern>/appstats/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- <servlet> <servlet-name>EntityServlet</servlet-name> <servlet-class>xviber.web.EntityServlet</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>EntityServlet</servlet-name> <url-pattern>/s/repo</url-pattern> 
+		</servlet-mapping> -->
+
+	<servlet>
+		<servlet-name>ImageUploadServlet</servlet-name>
+		<servlet-class>xviber.web.servlet.ImageUploadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ImageUploadServlet</servlet-name>
+		<url-pattern>/adm/photo/uploaded</url-pattern>
+	</servlet-mapping>
+
+	<!-- ****************************** filters ****************************** -->
+
+	<filter>
+		<filter-name>appstats</filter-name>
+		<filter-class>com.google.appengine.tools.appstats.AppstatsFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>appstats</filter-name>
+		<url-pattern>/s/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>appstats</filter-name>
+		<url-pattern>/p/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>appstats</filter-name>
+		<url-pattern>/_ah/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>appstats</filter-name>
+		<url-pattern>/adm/*</url-pattern>
+	</filter-mapping>	
+
+	<filter>
+		<filter-name>ErrorFilter</filter-name>
+		<filter-class>xviber.web.ErrorFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ErrorFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>HeaderFilter</filter-name>
+		<filter-class>xviber.web.HeaderFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>HeaderFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>AuthFilter</filter-name>
+		<filter-class>xviber.web.AuthFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AuthFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>UserShieldFilter</filter-name>
+		<filter-class>xviber.web.UserShieldFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>UserShieldFilter</filter-name>
+		<url-pattern>/s/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>PojoService</filter-name>
+		<filter-class>xviber.web.PojoFilter</filter-class>
+		<init-param>
+			<param-name>pattern</param-name>
+			<param-value>s.{0}Service</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>PojoService</filter-name>
+		<url-pattern>/s/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>PojoPublicService</filter-name>
+		<filter-class>xviber.web.PojoFilter</filter-class>
+		<init-param>
+			<param-name>pattern</param-name>
+			<param-value>p.{0}PublicService</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>PojoPublicService</filter-name>
+		<url-pattern>/p/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>PojoAdminService</filter-name>
+		<filter-class>xviber.web.PojoFilter</filter-class>
+		<init-param>
+			<param-name>pattern</param-name>
+			<param-value>adm.{0}AdminService</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>PojoPublicService</filter-name>
+		<url-pattern>/adm/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>PojoEventServiceFilter</filter-name>
+		<filter-class>xviber.web.PojoFilter</filter-class>
+		<init-param>
+			<param-name>pattern</param-name>
+			<param-value>ah.{0}EventService</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>PojoEventServiceFilter</filter-name>
+		<url-pattern>/_ah/channel/connected/</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>PojoEventServiceFilter</filter-name>
+		<url-pattern>/_ah/channel/disconnected/</url-pattern>
+	</filter-mapping>
+	
+	
+
+</web-app>

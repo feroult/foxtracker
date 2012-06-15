@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>foxtracker</groupId>
+	<artifactId>foxtracker-web</artifactId>
+	<packaging>war</packaging>
+	<name>foxtracker-web</name>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<parent>
+		<groupId>foxtracker</groupId>
+		<artifactId>foxtracker-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../foxtracker-parent</relativePath>
+	</parent>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>net.kindleit</groupId>
+			<artifactId>gae-runtime</artifactId>
+			<type>pom</type>
+		</dependency>
+
+		<!-- <dependency> <groupId>com.googlecode.restitory</groupId> <artifactId>restitory-gae-api</artifactId> 
+			</dependency> -->
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-labs</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-stubs</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-testing</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.mycontainer</groupId>
+			<artifactId>mycontainer-gae-web</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.mycontainer</groupId>
+			<artifactId>mycontainer-servlet-commons</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.mycontainer</groupId>
+			<artifactId>mycontainer-gae-web</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>foxtracker-web</finalName>
+		<plugins>
+			<plugin>
+				<groupId>net.kindleit</groupId>
+				<artifactId>maven-gae-plugin</artifactId>
+				<dependencies>
+					<dependency>
+						<groupId>net.kindleit</groupId>
+						<artifactId>gae-runtime</artifactId>
+						<version>${gae.version}</version>
+						<type>pom</type>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>com.googlecode.mycontainer</groupId>
+				<artifactId>maven-mycontainer-plugin</artifactId>
+				<version>${mycontainer.version}</version>
+				<configuration>
+					<script>src/test/resources/mycontainer-start.bsh</script>
+					<includeTests>true</includeTests>
+				</configuration>
+				<dependencies>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+	<application>pyratalabs</application>
+	<version>foxtracker</version>
+
+	<static-files>
+		<include path="/**" />
+		<exclude path="/s" />
+		<exclude path="/p" />
+		<exclude path="/adm" />
+		<exclude path="/appstats" />
+		<exclude path="/s/**" />
+		<exclude path="/p/**" />
+		<exclude path="/adm/**" />
+		<exclude path="/appstats/**" />
+		<exclude path="/index.html" />
+	</static-files>
+
+	<!-- <resource-files> <include path="/**" /> </resource-files> -->
+
+	<system-properties>
+		<property name="java.util.logging.config.file" value="WEB-INF/classes/logging.properties" />
+	</system-properties>
+
+	<sessions-enabled>false</sessions-enabled>
+
+	<threadsafe>true</threadsafe>
+
+	<inbound-services>
+		<service>channel_presence</service>
+	</inbound-services>
+
+</appengine-web-app>
