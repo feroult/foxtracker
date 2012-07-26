@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
-	<application>pyratalabs</application>
-	<version>foxtracker</version>
+	<application>foxtracker-web</application>
+	<version>1</version>
 
 	<static-files>
 		<include path="/**" />
