@@ -1,11 +1,14 @@
 package br.com.foxtracker.servlet;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 public class TestServlet extends HttpServlet {
 
@@ -23,8 +26,16 @@ public class TestServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		StringBuilder sb = new StringBuilder();
+	    BufferedReader br = req.getReader();
+	    String str;
+	    while( (str = br.readLine()) != null ){
+	        sb.append(str);
+	    }
+	    resp.getWriter().println(sb.toString());
+	    Gson gson = new Gson();
+	    TrackData d = gson.fromJson(sb.toString(), TrackData.class);
+	    resp.getWriter().println(d.getLatitude()+ " " + d.getLongitude());
 	}
 
 	@Override
